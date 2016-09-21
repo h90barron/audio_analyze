@@ -2,6 +2,8 @@ import pyaudio
 import sys
 import math
 
+# Obtain list of local audio devices
+
 def list_devices():
 	p = pyaudio.PyAudio()
 	i = 0
