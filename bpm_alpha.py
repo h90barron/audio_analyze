@@ -13,6 +13,10 @@ RECORD_SECONDS = 1
 WAVE_OUTPUT_FILENAME = "output.wav"
 DEVICE = 2
 
+# Record audio to wav file and analyze to discern beats
+# per minute of the recording. Currently this is NOT working. 
+# Some of the code to be fixed is commented out.
+
 p = pyaudio.PyAudio()
 file = open("raw_data.txt", 'w')
 stream = p.open(format=FORMAT,
@@ -46,32 +50,33 @@ file.write(result)
 stream.stop_stream()
 stream.close()
 p.terminate()
-"""
-wf = wave.open(WAVE_OUTPUT_FILENAME, 'wb')
-wf.setnchannels(CHANNELS)
-wf.setsampwidth(p.get_sample_size(FORMAT))
-wf.setframerate(RATE)
-wf.writeframes(b''.join(frames))
-wf.close()
 
-fs, input_data = wavfile.read('output.wav')
-data = input_data.T[0]
-print(data)
-raw_data = [(ele/2**8.)*2-1 for ele in data]
-raw_transform = fft(raw_data)
-freqs = fftfreq(len(raw_transform))
-print(freqs.min(), freqs.max())
 
-idx = np.argmax(np.abs(raw_transform))
-print(freqs)
-freq = freqs[idx]
-freq_in_hertz = abs(freq * RATE)
-print(freq_in_hertz)
-##fs, data = wavfile.read('output.wav')
-##a = data.T[0]
-##b = [(ele/2**8.)*2-1 for ele in a]
-##c = fft(b)
-##d = len(c)/2
-##plt.plot(abs(c[:(d-1)]), 'r')
-##plt.show()
-"""
+#wf = wave.open(WAVE_OUTPUT_FILENAME, 'wb')
+#wf.setnchannels(CHANNELS)
+#wf.setsampwidth(p.get_sample_size(FORMAT))
+#wf.setframerate(RATE)
+#wf.writeframes(b''.join(frames))
+#wf.close()
+
+#fs, input_data = wavfile.read('output.wav')
+#data = input_data.T[0]
+#print(data)
+#raw_data = [(ele/2**8.)*2-1 for ele in data]
+#raw_transform = fft(raw_data)
+#freqs = fftfreq(len(raw_transform))
+#print(freqs.min(), freqs.max())
+
+#idx = np.argmax(np.abs(raw_transform))
+#print(freqs)
+#freq = freqs[idx]
+#freq_in_hertz = abs(freq * RATE)
+#print(freq_in_hertz)
+#fs, data = wavfile.read('output.wav')
+#a = data.T[0]
+#b = [(ele/2**8.)*2-1 for ele in a]
+#c = fft(b)
+#d = len(c)/2
+#plt.plot(abs(c[:(d-1)]), 'r')
+#plt.show()
+
